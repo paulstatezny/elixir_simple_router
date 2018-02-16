@@ -1,18 +1,16 @@
 defmodule SimpleRouter do
-  @moduledoc """
-  Documentation for SimpleRouter.
-  """
+  alias __MODULE__
 
-  @doc """
-  Hello world.
+  def init(opts) do
+    opts
+  end
 
-  ## Examples
+  def call(conn, opts) do
+    conn
+    |> Plug.Conn.send_resp(200, "Hello World")
+  end
 
-      iex> SimpleRouter.hello
-      :world
-
-  """
-  def hello do
-    :world
+  def start(routes) do
+    {:ok, _} = Plug.Adapters.Cowboy.http(SimpleRouter, [])
   end
 end
